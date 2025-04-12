@@ -2,6 +2,7 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import mongoose from 'mongoose'
 import itemRouter from './routers/itemRouter.js'
+import userRouter from './routers/userRouter.js'
 
 const app = express()
 
@@ -21,3 +22,4 @@ app.listen(5000,()=>{
 })
 
 app.use("/api/item",itemRouter)
+app.use("/api/user",userRouter)

@@ -16,3 +16,16 @@ export function saveItem(req,res){
         }
     )
 }
+export function getAllItems(req,res){
+    Item.find().then(
+        (items)=>{
+            res.json(items)
+        }
+    ).catch(
+        ()=>{
+            res.json({
+                "message": "An error occured"
+            })
+        }
+    )
+}
