@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import mongoose from 'mongoose'
+import itemRouter from './routers/itemRouter.js'
 
 const app = express()
 
@@ -19,10 +20,4 @@ app.listen(5000,()=>{
     console.log("The server is running on port 5000")
 })
 
-app.get("/",(req,res)=>{
-    console.log(req.body)
-
-    res.json({
-        "message": "This is response"
-    })
-})
+app.use("/api/item",itemRouter)
