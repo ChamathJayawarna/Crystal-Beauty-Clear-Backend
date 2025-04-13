@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import itemRouter from './routers/itemRouter.js'
 import userRouter from './routers/userRouter.js'
 import jwt from 'jsonwebtoken'
+import productRouter from './routers/productRouter.js'
 
 const app = express()
 
@@ -38,3 +39,4 @@ app.listen(5000,()=>{
 
 app.use("/api/item",itemRouter)
 app.use("/api/user",userRouter)
+app.use("/api/product",productRouter)
