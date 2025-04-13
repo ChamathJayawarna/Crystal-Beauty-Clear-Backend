@@ -1,6 +1,12 @@
 import Item from "../models/item.js";
 
 export function saveItem(req,res){
+    if(req.user.role != "admin"){
+            res.json({
+                message : "Unauthorized access!"
+            })
+            return
+    }
     const item = new Item(req.body)
     item.save().then(
         ()=>{

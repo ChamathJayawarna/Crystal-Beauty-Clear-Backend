@@ -4,6 +4,6 @@ import { getAllUsers, loginUser, saveUser } from '../controllers/userController.
 const userRouter = express.Router()
 userRouter.post("/",saveUser)
 userRouter.get("/",getAllUsers)
-userRouter.get("/login",loginUser)
+userRouter.post("/login",loginUser)
 
 export default userRouter
