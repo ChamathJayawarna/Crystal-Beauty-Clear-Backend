@@ -3,12 +3,14 @@ import express from 'express'
 import mongoose from 'mongoose'
 import itemRouter from './routers/itemRouter.js'
 import userRouter from './routers/userRouter.js'
-import jwt from 'jsonwebtoken'
 import productRouter from './routers/productRouter.js'
+import { decodeUser } from './middleware/auth.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 
-mongoose.connect("mongodb+srv://admin:123@cluster0.89fe1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0").then(
+mongoose.connect(process.env.MONGODB_URL).then(
     ()=>{
         console.log("Database connected successfully")
     }
@@ -18,20 +20,7 @@ mongoose.connect("mongodb+srv://admin:123@cluster0.89fe1.mongodb.net/?retryWrite
     }
 )
 app.use(bodyParser.json())
-app.use(
-    (req,res,next)=>{
-        const header = req.header("Authorization")
-        if(header != null){
-            const token = header.replace("Bearer ","")           
-            jwt.verify(token,"secretKey123",(err,decoded)=>{
-                if(decoded != null){
-                    req.user = decoded
-                }
-            })            
-        }
-        next()
-    }
-)
+app.use(decodeUser)
 
 app.listen(5000,()=>{
     console.log("The server is running on port 5000")
