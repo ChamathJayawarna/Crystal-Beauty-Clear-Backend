@@ -7,6 +7,7 @@ import productRouter from './routers/productRouter.js'
 import { decodeUser } from './middleware/auth.js'
 import dotenv from 'dotenv'
 dotenv.config()
+import cors from 'cors'
 
 const app = express()
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGODB_URL).then(
 )
 app.use(bodyParser.json())
 app.use(decodeUser)
+app.use(cors())
 
 app.listen(5000,()=>{
     console.log("The server is running on port 5000")
