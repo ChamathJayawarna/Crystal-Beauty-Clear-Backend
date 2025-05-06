@@ -8,6 +8,7 @@ import { decodeUser } from './middleware/auth.js'
 import dotenv from 'dotenv'
 dotenv.config()
 import cors from 'cors'
+import orderRouter from './routers/orderRouter.js'
 
 const app = express()
 
@@ -31,3 +32,4 @@ app.listen(5000,()=>{
 app.use("/api/item",itemRouter)
 app.use("/api/user",userRouter)
 app.use("/api/product",productRouter)
+app.use("/api/order",orderRouter)

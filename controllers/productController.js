@@ -16,13 +16,13 @@ export function saveProduct(req,res){
     const product = new Product(req.body)
     product.save().then(
         ()=>{
-            res.json({
+            res.status(200).json({
                 message : "Product saved successfully"
             })
         }
     ).catch(
         ()=>{
-            res.json({
+            res.status(404).json({
                 message : "Product not saved"
             })
         }
@@ -41,6 +41,20 @@ export function getAllProducts(req,res){
         }
     )
 }
+export async function getProductById(req,res){
+    const productId = req.params.productId
+    const product = await Product.findOne({productId : productId})
+
+    if(product == null){
+        res.status(404).json({
+            message : "Product cannot be found"
+        })
+        return
+    }
+    res.json({
+        product : product
+    })
+}
 export function deleteProduct(req,res){
     if(req.user == null){
         res.json({
@@ -58,13 +72,13 @@ export function deleteProduct(req,res){
         productId : req.params.productId
     }).then(
         ()=>{
-            res.json({
+            res.status(200).json({
                 message : "Product deleted successfully"
             })
         }
     ).catch(
         ()=>{
-            res.json({
+            res.status.status(404).json({
                 message : "Product not deleted"
             })
         }
@@ -72,13 +86,13 @@ export function deleteProduct(req,res){
 }
 export function updateProduct(req,res){
     if(req.user == null){
-        res.json({
+        res.status(200).json({
             message : "You must be logged in first"
         })
         return
     }
     if(req.user.role != "admin"){
-        res.json({
+        res.status(404).json({
             message : "You are not authorized to update"
         })
         return
@@ -87,13 +101,13 @@ export function updateProduct(req,res){
         productId : req.params.productId
     },req.body).then(
         ()=>{
-            res.json({
+            res.status(200).json({
                 message : "Product updated successfully"
             })
         }
     ).catch(
         ()=>{
-            res.json({
+            res.status(404).json({
                 message : "Product not updated"
             })
         }

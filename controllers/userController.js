@@ -65,7 +65,7 @@ export function loginUser(req,res){
     }).then(
         (user)=>{
             if(user == null){
-                res.json({
+                res.status(404).json({
                     message: "Invalid email"
                 })
             }else{
@@ -81,12 +81,13 @@ export function loginUser(req,res){
                         isEmailVerified : user.isEmailVerified
                     }
                     const token = jwt.sign(userData,process.env.JWT_SECRETKEY)
-                    res.json({
+                    res.status(200).json({
                         message: "User logged in successfully",
-                        token : token
+                        token : token,
+                        user : userData
                     })
                 }else{
-                    res.json({
+                    res.status(404).json({
                         message: "Invalid password"
                     })
                 }
