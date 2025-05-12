@@ -15,7 +15,7 @@ const orderSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    productName: {
+    name: {
         type: String,
         required: true
     },
@@ -53,7 +53,7 @@ const orderSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    finalTotal: {
+    netTotal: {
         type: Number,
         required: true
     }

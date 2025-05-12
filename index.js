@@ -1,7 +1,6 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import mongoose from 'mongoose'
-import itemRouter from './routers/itemRouter.js'
 import userRouter from './routers/userRouter.js'
 import productRouter from './routers/productRouter.js'
 import { decodeUser } from './middleware/auth.js'
@@ -29,7 +28,6 @@ app.listen(5000,()=>{
     console.log("The server is running on port 5000")
 })
 
-app.use("/api/item",itemRouter)
 app.use("/api/user",userRouter)
 app.use("/api/product",productRouter)
 app.use("/api/order",orderRouter)
